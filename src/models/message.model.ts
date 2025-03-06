@@ -1,6 +1,21 @@
 import mongoose, { Document, Schema, Types } from "mongoose";
 import { IUser } from "./user.model";
 
+
+export enum MessageType {
+    DRAFT = "draft",
+    SENT = "sent",
+    INBOX = "inbox",
+    JUNK = "junk",
+    TRASH = "trash",
+    ARCHIVE = "archive",
+    SOCIAL = "social",
+    UPDATES = "updates",
+    FORUMS = "forums",
+    SHOPPING = "shopping",
+    PROMOTIONS = "promotions",
+}
+
 // Define the IMessage interface
 export interface IMessage extends Document {
     subject: string;
@@ -10,6 +25,7 @@ export interface IMessage extends Document {
     isRead: boolean;
     created_at?: Date;
     updated_at?: Date;
+    type?: MessageType;
 }
 
 // Define the IMessage schema
@@ -37,10 +53,11 @@ export const messageSchema: Schema<IMessage> = new Schema(
             required: true,
         },
 
-        isRead: {
-            type: Boolean,
-            default: false,
-        },
+        type: {
+            type: String,
+            enum: Object.values(MessageType),
+            required: true,
+          },
     },
     {
         timestamps: {
@@ -51,3 +68,5 @@ export const messageSchema: Schema<IMessage> = new Schema(
 );
 
 export default mongoose.model<IMessage>("Message", messageSchema);
+
+
