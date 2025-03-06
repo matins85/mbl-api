@@ -3,7 +3,7 @@ import { IUser } from "./user.model";
 
 
 export enum MessageType {
-    DRAFT = "draft",
+    DRAFT = "drafts",
     SENT = "sent",
     INBOX = "inbox",
     JUNK = "junk",
