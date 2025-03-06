@@ -13,6 +13,7 @@ class UserService {
                 subject: Joi.string().trim().required().label("Subject"),
                 content: Joi.string().trim().required().label("Content"),
                 recipient: Joi.string().trim().required().label("Recipient"),
+                type: Joi.string().trim().required().label("Message Type"),
             }),
             $currentUser: Joi.object({
                 _id: Joi.required(),
@@ -32,6 +33,7 @@ class UserService {
             subject: data.body.subject,
             content: data.body.content,
             recipient: data.body.recipient,
+            type: data.body.type,
             sender: data.$currentUser._id,
             isRead: false,
         };
