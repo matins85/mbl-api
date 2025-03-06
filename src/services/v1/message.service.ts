@@ -138,7 +138,7 @@ class UserService {
             .validate({ params, $currentUser, body });
         if (error) throw new CustomError(error.message, 400);
 
-        const user = await UserModel.findOne({ _id: data.$currentUser._id });
+        const user = await UserModel.findOne({ _id: body.recipient });
         if (!user) throw new CustomError("user not found", 404);
         const message = await MessageModel.findOneAndUpdate(
             { _id: data.body.messageId, recipient: user._id },
